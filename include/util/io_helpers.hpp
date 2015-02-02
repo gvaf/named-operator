@@ -4,33 +4,38 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include <wheels/meta.h++>
-
-namespace util {
-
-template <typename C>
-struct is_container : std::false_type { };
-
-template <typename T, typename A>
-struct is_container<std::vector<T, A>> : std::true_type { };
-
-} // namespace util
+#include <cstdlib>
 
 template <typename T>
-inline std::ostream& operator <<(std::ostream& out, std::pair<T, T> const& rhs) {
+inline std::ostream& operator <<(std::ostream& out, std::pair<T, T> const& rhs) 
+{
     return out << '<' << rhs.first << ", " << rhs.second << '>';
 }
 
-template <typename C, wheels::EnableIf<util::is_container<C>>...>
-inline std::ostream& operator <<(std::ostream& out, C const& rhs) {
+template <typename T>
+inline std::ostream& operator <<(std::ostream& out, const std::vector<T> & rhs) 
+{
     out << '[';
+
     bool first = true;
-    for (auto&& x : rhs) {
-        if (first) first = false;
-        else       out << ", ";
-        out << x;
+
+    for (auto&& x : rhs) 
+    {
+        if (first)
+        {
+        	first = false;
+        }
+        else        
+        {
+        	out << ", ";
+        }
+
+         out << x;
     }
-    return out << ']';
+
+    out << ']';
+
+	return out;
 }
 
-#endif // ndef UTIL_IO_HELPERS_HPP
+#endif // UTIL_IO_HELPERS_HPP

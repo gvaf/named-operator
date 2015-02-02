@@ -25,17 +25,17 @@ auto in = base::make_named_operator(
         return std::find(begin(x), end(x), i) != end(x);
     });
 
-int main() {
+int main() 
+{
     int x = 42;
     int y = 23;
     auto z = x <divmod> y;
 
-    std::cout << z << '\n';
+    std::cout << z << std::endl;
 
     std::vector<int> vec{ 1, 2, 3 };
     vec <append>= 4;
 
-    std::cout << std::boolalpha;
-    std::cout << "3 in " << vec << ": " << (3 <in> vec) << '\n'
-              << "5 in " << vec << ": " << (5 <in> vec) << '\n';
+    std::cout << "3 in " << vec << ": " << (3 <in> vec) << std::endl
+              << "5 in " << vec << ": " << (5 <in> vec) << std::endl;
 }
